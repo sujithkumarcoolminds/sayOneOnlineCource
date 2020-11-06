@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG">
+    <Properties>
+        <Property name="basePath">F:\Coolminds\Work\Logs\sayone</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="LogToFile" fileName="${basePath}/sayone-online-app.log"
+                     filePattern="${basePath}/sayone-online-app-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <pattern>%d{yyyy-MM-dd_'T'HH:mm:ss.sss'Z'} [%-5p] [%C] - %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="SayOneLog" fileName="${basePath}/sayone-online-info.log"
+                     filePattern="${basePath}/sayone-online-info-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <pattern>%d{yyyy-MM-dd_'T'HH:mm:ss.sss'Z'} [%-5p] [%C] - %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.sayone.online" level="DEBUG" additivity="false">
+            <AppenderRef ref="SayOneLog"/>
+        </Logger>
+        <Root level="DEBUG" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="LogToFile"/>
+        </Root>
+    </Loggers>
+</Configuration>
